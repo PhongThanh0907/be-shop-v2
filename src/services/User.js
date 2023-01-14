@@ -85,16 +85,18 @@ export const loginUser = async (email, password) => {
     if (!isPasswordValid) throw new Error("Password is not correct");
 
     return {
-      _id: user._id,
-      userName: user.userName,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken({
+      data: {
         _id: user._id,
         userName: user.userName,
         email: user.email,
         isAdmin: user.isAdmin,
-      }),
+        token: generateToken({
+          _id: user._id,
+          userName: user.userName,
+          email: user.email,
+          isAdmin: user.isAdmin,
+        }),
+      },
     };
   } catch (error) {
     throw new Error(`Failed to login user: ${error.message}`);
